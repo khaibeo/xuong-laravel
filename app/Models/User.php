@@ -46,4 +46,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+    //tự chuyển kiểu dữ liệu trước khi thêm vào db
+
+    public function isAdmin()
+    {
+        return $this->type === self::TYPE_ADMIN;
+    }
 }
