@@ -21,14 +21,16 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-lg-12">
-            <div class="card">
-                <div class="card-header align-items-center d-flex">
-                    <h4 class="card-title mb-0 flex-grow-1">Thông tin sản phẩm</h4>
-                </div><!-- end card header -->
-                <div class="card-body">
-                    <div class="live-preview">
-                        <form action="{{ route('admin.products.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('admin.products.store') }}" method="POST" enctype="multipart/form-data">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header align-items-center d-flex">
+                        <h4 class="card-title mb-0 flex-grow-1">Thông tin sản phẩm</h4>
+                    </div><!-- end card header -->
+
+                    <div class="card-body">
+                        <div class="live-preview">
+
                             <div class="row gy-4">
                                 <div class="col-md-4">
                                     <div>
@@ -119,59 +121,116 @@
                                     </div>
                                 </div>
                             </div>
-                        </form>
-                    </div>
-                    <!--end row-->
-                </div>
-            </div>
 
-            <div class="card">
-                <div class="card-header align-items-center d-flex">
-                    <h4 class="card-title mb-0 flex-grow-1">Biến thể</h4>
-                </div><!-- end card header -->
-                <div class="card-body">
-                    <div class="live-preview">
-                        <div class="row gy-4" style="height: 300px; overflow:scroll">
-                            <table class="table table-responsive">
-                                <thead>
-                                    <tr>
-                                        <th>Size</th>
-                                        <th>Màu</th>
-                                        <th>Số lượng</th>
-                                        <th>Ảnh</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($sizes as $sizeId => $size)
-                                        @foreach ($colors as $colorId => $color)
-                                            <tr>
-                                                <td>{{ $size }}</td>
-                                                <td>
-                                                    <div
-                                                        style="width: 30px; height: 30px; background: {{ $color }}">
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    <input type="text"
-                                                        name="product_variants[{{ $sizeId . '-' . $colorId }}][quantity]"
-                                                        class="form-control">
-                                                </td>
-                                                <td>
-                                                    <input type="file"
-                                                        name="product_variants[{{ $sizeId . '-' . $colorId }}][image]"
-                                                        class="form-control">
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    @endforeach
-                                </tbody>
-                            </table>
                         </div>
+                        <!--end row-->
                     </div>
-                    <!--end row-->
+                </div>
+
+                <div class="card">
+                    <div class="card-header align-items-center d-flex">
+                        <h4 class="card-title mb-0 flex-grow-1">Biến thể</h4>
+                    </div><!-- end card header -->
+                    <div class="card-body">
+                        <div class="live-preview">
+                            <div class="row gy-4" style="height: 300px; overflow:scroll">
+                                <table class="table table-responsive">
+                                    <thead>
+                                        <tr>
+                                            <th>Size</th>
+                                            <th>Màu</th>
+                                            <th>Số lượng</th>
+                                            <th>Ảnh</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($sizes as $sizeId => $size)
+                                            @foreach ($colors as $colorId => $color)
+                                                <tr>
+                                                    <td>{{ $size }}</td>
+                                                    <td>
+                                                        <div
+                                                            style="width: 30px; height: 30px; background: {{ $color }}">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <input type="text"
+                                                            name="product_variants[{{ $sizeId . '-' . $colorId }}][quantity]"
+                                                            class="form-control">
+                                                    </td>
+                                                    <td>
+                                                        <input type="file"
+                                                            name="product_variants[{{ $sizeId . '-' . $colorId }}][image]"
+                                                            class="form-control">
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!--end row-->
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header align-items-center d-flex">
+                        <h4 class="card-title mb-0 flex-grow-1">Ảnh</h4>
+                    </div><!-- end card header -->
+                    <div class="card-body">
+                        <div class="live-preview">
+                            <div class="row gy-4" style="height: 300px; overflow:scroll">
+                                <div class="col-md-4">
+                                    <div>
+                                        <label for="name" class="form-label">Ảnh 1</label>
+                                        <input type="file" class="form-control" name="product_galleries[]"
+                                            id="gallery_1">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div>
+                                        <label for="sku" class="form-label">Ảnh 2</label>
+                                        <input type="file" class="form-control" name="product_galleries[]"
+                                            id="gallery_2">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--end row-->
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header align-items-center d-flex">
+                        <h4 class="card-title mb-0 flex-grow-1">Tag/h4>
+                    </div><!-- end card header -->
+                    <div class="card-body">
+                        <div class="live-preview">
+                            <div class="row gy-4" style="height: 300px; overflow:scroll">
+                                <div class="col-md-12">
+                                    <div>
+                                        <label for="name" class="form-label">Tag</label>
+                                        <select class="form-control" name="tags[]" id="tags" multiple>
+                                            @foreach ($tags as $id => $name)
+                                                <option value="{{ $id }}">{{ $name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--end row-->
+                    </div>
+                </div>
+                @csrf
+                <div class="card">
+                    <div class="card-header align-items-center d-flex">
+                        <button class="btn btn-primary">Lưu</button>
+                    </div><!-- end card header -->
                 </div>
             </div>
-        </div>
+        </form>
     </div>
     <!--end col-->
     </div>

@@ -103,12 +103,14 @@
                                                         Sửa</a>
                                                 </li>
                                                 <li>
-                                                    <a onclick="return confirm('Bạn có chắc là muốn xóa ?')"
-                                                        href="{{ route('admin.products.destroy', $item->id) }}"
-                                                        class="dropdown-item remove-item-btn">
-                                                        <i class="ri-delete-bin-fill align-bottom me-2 text-muted"></i>
-                                                        Xóa
-                                                    </a>
+                                                    <form action="{{ route('admin.products.destroy', $item->id) }}"
+                                                        method="POST">
+                                                        @csrf
+                                                        <button class="btn"
+                                                            onclick="return confirm('Bạn có chắc là muốn xóa ?')"><i
+                                                                class="ri-delete-bin-fill align-bottom me-2 text-muted"></i>Xóa</button>
+                                                        @method('DELETE')
+                                                    </form>
                                                 </li>
                                             </ul>
                                         </div>
