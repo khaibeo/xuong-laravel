@@ -71,32 +71,32 @@
                                 <div class="col-md-8">
                                     <div class="mb-3 d-flex justify-content-between">
                                         <div class="form-check form-switch form-switch-custom form-switch-primary">
-                                            <input class="form-check-input" type="checkbox" name="is_active" role="switch"
-                                                id="is_active" checked>
+                                            <input class="form-check-input" value="1" type="checkbox" name="is_active"
+                                                role="switch" id="is_active" checked>
                                             <label class="form-check-label" for="is_active">Hoạt động</label>
                                         </div>
 
                                         <div class="form-check form-switch form-switch-custom form-switch-secondary">
-                                            <input class="form-check-input" type="checkbox" name="is_hot_deal"
-                                                role="switch" id="is_hot_deal" checked>
+                                            <input class="form-check-input" value="1" type="checkbox"
+                                                name="is_hot_deal" role="switch" id="is_hot_deal" checked>
                                             <label class="form-check-label" for="is_hot_deal">Deal hot</label>
                                         </div>
 
                                         <div class="form-check form-switch form-switch-custom form-switch-success">
-                                            <input class="form-check-input" type="checkbox" name="is_good_deal"
-                                                role="switch" id="is_good_deal" checked>
+                                            <input class="form-check-input" value="1" type="checkbox"
+                                                name="is_good_deal" role="switch" id="is_good_deal" checked>
                                             <label class="form-check-label" for="is_good_deal">Deal tốt</label>
                                         </div>
 
                                         <div class="form-check form-switch form-switch-custom form-switch-warning">
-                                            <input class="form-check-input" type="checkbox" name="is_new" role="switch"
-                                                id="is_new" checked>
+                                            <input class="form-check-input" value="1" type="checkbox" name="is_new"
+                                                role="switch" id="is_new" checked>
                                             <label class="form-check-label" for="is_new">Mới</label>
                                         </div>
 
                                         <div class="form-check form-switch form-switch-custom form-switch-danger">
-                                            <input class="form-check-input" type="checkbox" name="is_show_home"
-                                                role="switch" id="is_show_home" checked>
+                                            <input class="form-check-input" value="1" type="checkbox"
+                                                name="is_show_home" role="switch" id="is_show_home" checked>
                                             <label class="form-check-label" for="is_show_home">Hiển thị trang chủ</label>
                                         </div>
                                     </div>
@@ -145,16 +145,24 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($sizes as $sizeId => $size)
+                                            @php
+                                                $flagRowSpan = true;
+                                            @endphp
                                             @foreach ($colors as $colorId => $color)
                                                 <tr>
-                                                    <td>{{ $size }}</td>
+                                                    @if ($flagRowSpan)
+                                                        <td class="align-middle" rowspan="{{ count($colors) }}"><b>{{ $size }}</b></td>
+                                                    @endif
+                                                    @php
+                                                        $flagRowSpan = false;
+                                                    @endphp
                                                     <td>
                                                         <div
                                                             style="width: 30px; height: 30px; background: {{ $color }}">
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <input type="text"
+                                                        <input type="text" value=""
                                                             name="product_variants[{{ $sizeId . '-' . $colorId }}][quantity]"
                                                             class="form-control">
                                                     </td>

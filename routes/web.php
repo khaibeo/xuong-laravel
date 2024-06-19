@@ -7,6 +7,11 @@ use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\CatalogueController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProductController as UserProductController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -20,8 +25,10 @@ use App\Http\Controllers\Admin\ProductController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    $products = \App\Models\Product::query()->latest('id')->paginate(12);
+
+    return view('welcome', compact('products'));
+})->name('welcome');
 
 Route::resource('categories', CategoryController::class);
 
@@ -35,13 +42,9 @@ Route::get('auth/register', [RegisterController::class, 'showFormRegister'])->na
 Route::post('auth/register', [RegisterController::class, 'register']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('ahihi', function () {
-    return 'ahihi';
-})->middleware('admin');
-
-
 Route::prefix('admin')
     ->as('admin.')
+    ->middleware(['auth','admin'])
     ->group(function () {
         Route::get('/', function () {
             return view('admin.dashboard');
@@ -61,3 +64,10 @@ Route::prefix('admin')
 
         Route::resource('products', ProductController::class);
     });
+
+Route::get('product/{slug}', [UserProductController::class, 'detail'])->name('product.detail');
+
+// Mua bán hàng
+Route::get('cart/list', [CartController::class, 'list'])->name('cart.list');
+Route::post('cart/add', [CartController::class, 'add'])->name('cart.add');
+Route::post('order/save', [OrderController::class, 'save'])->name('order.save');

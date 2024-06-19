@@ -49,11 +49,11 @@ class ProductController extends Controller
     {
         $dataProduct = $request->except(['product_variants', 'tags', 'product_galleries']);
         //xử lí trạng thái
-        $dataProduct['is_active'] = isset($dataProduct['is_active']) ? 1 : 0;
-        $dataProduct['is_hot_deal'] = isset($dataProduct['is_active']) ? 1 : 0;
-        $dataProduct['is_good_deal'] = isset($dataProduct['is_active']) ? 1 : 0;
-        $dataProduct['is_new'] = isset($dataProduct['is_active']) ? 1 : 0;
-        $dataProduct['is_show_home'] = isset($dataProduct['is_active']) ? 1 : 0;
+        $dataProduct['is_active'] ??= 0;
+        $dataProduct['is_hot_deal'] ??= 0;
+        $dataProduct['is_good_deal'] ??= 0;
+        $dataProduct['is_new'] ??= 0;
+        $dataProduct['is_show_home'] ??= 0;
         $dataProduct['slug'] = Str::slug($dataProduct['name']) . '-' . $dataProduct['sku'];
         $dataProduct['views'] = 0;
 
